@@ -1,0 +1,77 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Create a new privilege</mat-card-title>
+    <form [formGroup]="privilegeForm" autocomplete="off" novalidate (ngSubmit)="createPrivilege(privilegeForm.value)"
+      fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Privilege's name" formControlName="name" id="name">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Privilege's description" formControlName="description"
+            id="description">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Privilege's type" formControlName="type" id="type">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Privilege's permission" formControlName="permission" id="permission">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <!--div class="form-group">
+          <ejs-combobox formControlName="privilegeForm" name="domain" allowCustom=false
+                        [dataSource]='domainOptions' [placeholder]='autoreactiveplaceholder' floatLabelType='Auto'>
+          </ejs-combobox>
+          <div *ngIf="privilegeForm.controls.domain.invalid && privilegeForm.controls.domain.touched" class="alert alert-danger">
+            <div *ngIf="privilegeForm.controls.domain.errors.required">
+              Book Name is required.
+            </div>
+          </div>
+        </div-->
+        <mat-form-field>
+          <mat-select formControlName="domain">
+            <mat-option *ngFor="let option of domainOptions" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-select>
+          <mat-hint align="end">The area the privilege is for.</mat-hint>
+          <mat-error *ngIf="hasError('domain', 'required')">Domain is required</mat-error>
+        </mat-form-field>
+
+        <ejs-multiselect formControlName="actions" [dataSource]='privilegeActions' [placeholder]="'Select action'">
+        </ejs-multiselect>
+        <div
+          *ngIf="privilegeForm.controls.actions.invalid && (privilegeForm.controls.actions.dirty ||privilegeForm.controls.actions.touched)"
+          class="alert alert-danger">
+          <div *ngIf="privilegeForm.controls.actions.errors.required">
+            One or more action is required
+          </div>
+        </div>
+
+        <!-- <mat-form-field>
+          <mat-select formControlName="actions" multiple>
+            <mat-option *ngFor="let action of privilegeActions" [value]="action">{{action}}</mat-option>
+          </mat-select>
+          <mat-hint align="end">One or more action is needed.</mat-hint>
+          <mat-error *ngIf="hasError('actions', 'required')">One or more action is required</mat-error>
+        </mat-form-field> -->
+
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!privilegeForm.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" [routerLink]="['/privileges']">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>

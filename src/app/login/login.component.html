@@ -1,0 +1,57 @@
+<div class="c-set-back-ground-image c-div-display-logo">
+
+  <div class="logo-back-ground-image-text-center">
+    <img class="c-set-logo-on-back-ground-image" src="assets/images/Konfigure_Logo.png">
+  </div>
+
+  <div class="logo-back-ground-image">
+    <mat-card class="login-box c-width-login-box max-height-mat-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h1>Welcome Back! </h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-padding">
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Username" class="form-control" formControlName="username" id="username"
+                autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+            </mat-form-field>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Username is required</div>
+            </div>
+            <div class="error"
+              *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">
+              Ein Username ist nötig
+            </div>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <span class="c-display--flex c-align--center">
+                <input matInput placeholder="Password" type="password" #pass class="form-control"
+                  formControlName="password" id="pwd" autocomplete="off">
+                <i class="material-icons button" (click)="pass.type=(pass.type=='password')?'text':'password'"
+                  title="{{pass.type=='password' ? 'Show':'Hide'}}">
+                  {{pass.type=='password' ? 'visibility':'visibility_off'}}</i>
+              </span>
+            </mat-form-field>
+            <div class="error"
+              *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
+              Ein Password ist nötig
+            </div>
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>
+          <div class="button-text-align-center">
+            <button mat-raised-button class="c-button-padding-width" [disabled]="loginForm.invalid">Login</button>
+          </div>
+          <div *ngIf="invalidLogin" class="error">
+            <div>Invalid credentials.</div>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

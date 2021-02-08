@@ -1,0 +1,126 @@
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+  <div fxLayout="row wrap">
+    <div fxFlex="33" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" style="padding: 5px;">
+
+      <mat-form-field class="search-form">
+        <input matInput placeholder="Search" type="text" [(ngModel)]="searchword" (input)="searchThis()">
+      </mat-form-field>
+
+    </div>
+    <div fxFlex="67" fxFlex.md="67" fxFlex.sm="50" fxFlex.xs="100" fxLayoutAlign="end">
+      <mat-form-field>
+        <mat-select placeholder="sortBy" (selectionChange)="dynamicSort($event);">
+          <mat-option [value]=""></mat-option>
+          <mat-option [value]="'identifier'">Identifier</mat-option>
+          <mat-option [value]="'displayName'"> Name</mat-option>
+          <mat-option [value]="'createDate'">Date created</mat-option>
+          <mat-option [value]="'modifyDate'">Date last updated</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div fxLayout="row wrap">
+    <div *ngFor="let application of applications" fxFlex="33" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
+      class="c-div-padding">
+      <mat-card class="mat-card-border-radius-color">
+        <mat-card-header class="mat-card-header-color mat-card-header-border-radius-color">
+          <img mat-card-avatar class="c-img-margin-top-left" src="{{application.image}}" />
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column" class="c-mat-header-margin-top">
+            <span fxFlex="100%">
+              <a class="mat-card-title-subtitle-formatting"
+                [routerLink]="[application.id]">{{application.displayName}}</a>
+            </span>
+          </mat-card-title>
+          <mat-card-subtitle class="mat-card-title-subtitle-formatting">{{application.identifier}}</mat-card-subtitle>
+          <div fxFlex></div>
+          <!--button mat-icon-button>
+            <mat-icon aria-label="Edit the application">edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon aria-label="Disable the application">delete</mat-icon>
+          </button-->
+
+
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+            <mat-tab label="Overview">
+              <div fxFlex="100%" class="c-mat-application-div">
+
+                <div fxLayout="row">
+                  <p class="c-font-size-p c-remove-margin-top" fxFlex="25%">
+                    Versions:
+                  </p>
+                  <div id="navcontainer" fxFlex="75%">
+                    <a class="link-color" *ngFor="let version of application.version; index as i" [routerLink]="[application.id]"><span
+                        class="link-color c-font-size-p"> {{i == 0 ? version.name : ', ' +
+                        version.name }}</span></a>
+                  </div>
+                </div>
+
+                <div fxLayout="row">
+                  <p class="c-font-size-p c-remove-margin-top" fxFlex="25%"> Owner: </p>
+                  <div fxFlex="75%" class="c-font-size-p">
+                    {{application?.owner?.preName}} {{application?.owner?.name}}<br />
+                  </div>
+                </div>
+
+                <div fxLayout="row">
+                  <p class="c-font-size-p c-remove-margin-top" fxFlex="25%"> Delegate: </p>
+                  <div fxFlex="75%" class="c-font-size-p">
+                    {{application?.ownerDelegate?.preName}} {{application?.ownerDelegate?.name}}<br />
+                  </div>
+                </div>
+
+                <div fxLayout="row">
+                  <p class="c-font-size-p c-remove-margin-top" fxFlex="25%"> Status: </p>
+                  <div fxFlex="75%" class="c-font-size-p">
+                    <ejs-inplaceeditor id="status" mode="Inline" type="DropDownList"
+                      (actionSuccess)="actionSuccess($event,application.id)" value="{{application.status}}"
+                      [model]="model">
+                    </ejs-inplaceeditor>
+                  </div>
+                </div>
+
+                <div fxLayout="row">
+                  <p class="c-font-size-p" fxFlex="25%"> Tags: </p>
+                  <div fxFlex="75%">
+                    <tag-input class="tag-input-width" [ngModel]="application?.tags" [identifyBy]="'id'"
+                      [displayBy]="'tag'" (onAdd)="onItemAdded($event,application.id)"
+                      (onRemove)="onItemRemoved($event,application.id)">
+                    </tag-input>
+                    <mat-icon class="example-icon mat-icon-margin" aria-hidden="false" aria-label="Bags">sell
+                    </mat-icon>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Environments">
+              <div id="env" fxFlex="100%" class="c-mat-list-div">
+                <mat-list class="mat-list-min-height">
+                  <!-- <li *ngFor="let person of application.envTypes; last as last">
+                    {{person.name}}
+                  </li> -->
+
+                  <mat-list-item *ngFor="let envType of application.envTypes; last as last">
+                    <div matLine>
+                      <span style="float:left">
+                        <a class="environment-style"
+                          [routerLink]="['/environmentoverview',application.id,envType.id ]">{{envType.name}}</a>
+                      </span>
+                      <span style="float:right; font-size: 15px;">{{envType.environments.length}}</span>
+                    </div>
+                    <mat-divider *ngIf="!last"></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.cuton-timeline-wrapper {
+    .content-left {
+        &.no-alternate {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    .mat-card {
+        max-width: calc(100% - 60px);
+        .mat-card-title {
+            word-break: break-all;
+        }
+    }
+}

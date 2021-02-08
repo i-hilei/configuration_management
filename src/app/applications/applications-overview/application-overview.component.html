@@ -1,0 +1,53 @@
+<div style="background-color: whitesmoke; width:100%; padding: 5px ">
+    Applications -> {{application?.name}}
+</div>
+
+<div fxLayout="row" fxLayoutGap="5px" style="padding: 5px" xmlns="http://www.w3.org/1999/html">
+    <div fxFlex="50%" id="env1" style="background-color: whitesmoke; width:100%">
+        <p style="padding: 5px">{{application?.name}} ({{application?.identifier}})
+            <tag-input theme='bootstrap' [ngModel]="application?.tags" [identifyBy]="'id'" [displayBy]="'tag'" (onAdd)="onItemAdded($event,application.id)" (onRemove)="onItemRemoved($event,application.id)">
+            </tag-input>
+        </p>
+    </div>
+    <div fxFlex="50%" id="env" style="background-color: whitesmoke; width:100%; padding: 5px ">
+        Owner: {{application?.owner?.preName}} {{application?.owner?.name}}<br/> {{application?.owner?.email}}
+        <br/><br/> Delegate: {{application?.ownerDelegate?.preName}} {{application?.ownerDelegate?.name}}<br/> {{application?.ownerDelegate?.email}}
+        <br/>
+    </div>
+</div>
+<div fxLayout="row" fxLayoutGap="5px" style="padding: 5px" xmlns="http://www.w3.org/1999/html">
+    <div fxLayout="row" fxFlex="25%" id="timeline" style="background-color: whitesmoke; width:100%; padding: 5px">
+
+        <span>
+
+        <mzd-timeline class="cuton-timeline-wrapper" [alternateSide]="false" [chat]="false">
+            <ng-container *ngFor="let version of application?.version; last as last">
+          <mzd-timeline-content  [card]="false">
+          <mzd-icon><fa-icon [icon]="faCheckCircle"></fa-icon></mzd-icon>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>
+            <i class="far fa-check-circle"></i>
+                  {{version.name}} - {{version.status}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                  {{version.created | date:'dd.MM.yyyy HH:mm'}}
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+              </mat-card-content>
+            </mat-card>
+          </mzd-timeline-content>
+          <mzd-timeline-content  *ngFor="let configuration of version.configurations" [border]="true" [color]="'accent'"  [card]="false">
+            <mzd-icon><fa-icon [icon]="faCheckCircle"></fa-icon></mzd-icon>
+            <a [routerLink]="[{ outlets: { right: ['configuration',application.id,version.id,configuration.id] } }]">{{version.name}} - {{configuration.configurationVersion}}</a> / {{configuration.created | date:'dd.MM.yyyy HH:mm'}} <br/>
+            <p>{{configuration.name}}</p>
+          </mzd-timeline-content>
+        </ng-container>
+        </mzd-timeline>
+        </span>
+    </div>
+    <div fxFlex="75%" id="configuration" style="background-color: whitesmoke; width:100%">
+        <router-outlet name="right"></router-outlet>
+    </div>
+</div>

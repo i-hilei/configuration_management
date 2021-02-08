@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<udm.DeploymentPackage version="1.9" application="PetClinic">
+  <application />
+  <orchestrator />
+  <satisfiesDisableAutomicJobs>true</satisfiesDisableAutomicJobs>
+  <satisfiesReleaseNotes>false</satisfiesReleaseNotes>
+  <satisfiesPerformanceTested>false</satisfiesPerformanceTested>
+  <deployables>
+    <jee.Ear name="/PetClinic" file="/PetClinic/PetClinic-2.0.ear">
+      <tags>
+        <value>petclinic</value>
+      </tags>
+      <scanPlaceholders>false</scanPlaceholders>
+      <preScannedPlaceholders>true</preScannedPlaceholders>
+      <placeholders />
+      <checksum>a1062ed80ecba5ae43cd417856b43a226319205dfa8aef0fb4a5839b12f35000</checksum>
+    </jee.Ear>
+    <smoketest.HttpRequestTest name="/Test">
+      <tags>
+        <value>petclinic</value>
+      </tags>
+      <url>{{SmokeTest_URL}}</url>
+      <headers />
+      <startDelay>5</startDelay>
+      <maxRetries>5</maxRetries>
+      <retryWaitInterval>5</retryWaitInterval>
+      <timeout>5</timeout>
+      <order>102</order>
+    </smoketest.HttpRequestTest>
+    <k8s.ResourcesFile name="/PetClinicOnKubernetes" file="/PetClinicOnKubernetes/nginx.yaml">
+      <tags />
+      <scanPlaceholders>true</scanPlaceholders>
+      <preScannedPlaceholders>true</preScannedPlaceholders>
+      <placeholders />
+      <delimiters>{{ }}</delimiters>
+      <checksum>071d7d7927fd5fb661bc939d38e992ba49b3b5909f8fc8825802002fe3614035</checksum>
+      <mergePatchType>strategic</mergePatchType>
+      <propagationPolicy>Foreground</propagationPolicy>
+      <updateMethod>patch</updateMethod>
+      <createOrder>60</createOrder>
+      <modifyOrder>50</modifyOrder>
+      <destroyOrder>40</destroyOrder>
+    </k8s.ResourcesFile>
+  </deployables>
+  <applicationDependencies>
+    <entry key="PetClinic_selenium_tests">1.9</entry>
+  </applicationDependencies>
+  <dependencyResolution>LATEST</dependencyResolution>
+  <undeployDependencies>false</undeployDependencies>
+  <templates />
+  <boundTemplates />
+</udm.DeploymentPackage>

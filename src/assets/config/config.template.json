@@ -1,0 +1,6 @@
+{
+  "baseUrl": "${BASE_URL}",
+  "wsUrl": "${WS_URL}",
+  "stage": "${STAGE}",
+  "colorScheme": "${COLOR}"
+}

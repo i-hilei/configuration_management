@@ -1,0 +1,29 @@
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+  <div fxLayout="row wrap">
+    <div fxFlex="33" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" style="padding: 5px;">
+      <mat-form-field class="search-form">
+        <input matInput placeholder="Search" type="text" [(ngModel)]="searchword" (input)="searchThis()">
+      </mat-form-field>
+    </div>
+    <div fxFlex="67" fxFlex.md="67" fxFlex.sm="50" fxFlex.xs="100" fxLayoutAlign="end" >
+      <mat-form-field>
+        <mat-select placeholder="sortBy" (selectionChange)="dynamicSort($event);">
+          <mat-option [value]=""></mat-option>
+          <!-- <mat-option [value]="'id'">Id</mat-option> -->
+          <mat-option [value]="'identifier'">Identifier</mat-option>
+          <mat-option [value]="'displayName'"> Name</mat-option>
+          <mat-option [value]="'createDate'">Date created</mat-option>
+          <mat-option [value]="'modifyDate'">Date last updated</mat-option>
+          <mat-option [value]="'type'">Type</mat-option>
+          <mat-option [value]="'identifier,type,name'">Identifier,Type,Name</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="row wrap" style="padding-top: 50px">
+    <div *ngFor="let environment of environments" fxFlex="33" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
+      style="padding: 5px;">
+      <app-environment-card [environment]="environment"></app-environment-card>
+    </div>
+  </div>
+</div>

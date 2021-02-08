@@ -1,0 +1,72 @@
+<!-- <p>user-create works!</p> -->
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Create a new user</mat-card-title>
+    <form [formGroup]="UserForm" autocomplete="off" novalidate (ngSubmit)="createUser(UserForm.value)"
+      fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="UserId" formControlName="userId" id="userId">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('userId', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('userId', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="User's name" formControlName="name" id="name">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="User's preName" formControlName="preName" id="preName">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('preName', 'required')">preName is required</mat-error>
+          <mat-error *ngIf="hasError('preName', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="email" placeholder="User's email" formControlName="email" id="email">
+          <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="User's password" formControlName="password" id="password">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('password', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="isTechnical" placeholder="is Technical?">
+            <mat-option [value]="true">Yes </mat-option>
+            <mat-option [value]="false">No </mat-option>
+          </mat-select>
+          <mat-hint align="end">The area the isTechnical is for.</mat-hint>
+          <mat-error *ngIf="hasError('isTechnical', 'required')">isTechnical is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="status" placeholder="Status">
+            <mat-option *ngFor="let status of StatusList" [value]="status">{{status}} </mat-option>
+          </mat-select>
+          <mat-hint align="end">The area the status is for.</mat-hint>
+          <mat-error *ngIf="hasError('status', 'required')">status is required</mat-error>
+        </mat-form-field>
+
+        <ejs-multiselect formControlName="group" name="group" [dataSource]='GroupList' [fields]='fields1'
+          [placeholder]="'Select a group'">
+        </ejs-multiselect>
+        <div
+          *ngIf="UserForm.controls.group.invalid && (UserForm.controls.group.dirty ||UserForm.controls.group.touched)"
+          class="alert alert-danger">
+          <div *ngIf="UserForm.controls.group.errors.required">
+            group is required.
+          </div>
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!UserForm.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" [routerLink]="['/users']">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>

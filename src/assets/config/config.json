@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://prototype.treehouse.devops-in-a-box.de",
+  "wsUrl": "https://prototype.treehouse.devops-in-a-box.de/api/konfigure/notification/updates",
+  "stage": "DEV",
+  "colorScheme": "#efefef"
+}

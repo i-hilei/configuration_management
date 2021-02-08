@@ -1,0 +1,22 @@
+<div class="course" style="padding: 5px">
+  <a style="text-decoration: none; color: black" [routerLink]="['/users']">
+    Users
+  </a>
+  <a style="text-decoration: none; color: black" [routerLink]="['/groups']">
+    Groups
+  </a>
+  <a style="text-decoration: none; color: black" [routerLink]="['/roles']">
+    Roles
+  </a>
+  <a style="text-decoration: none; color: black" [routerLink]="['/privileges']">
+    Privileges
+  </a>
+
+  <div align="right" style="padding-right: 10px">
+    <a [routerLink]="['/privileges/create']" mat-button color="primary">Create Privilege</a>
+  </div>
+  <br/>
+  <router-outlet></router-outlet>
+</div>
+
+

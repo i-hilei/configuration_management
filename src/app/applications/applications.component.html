@@ -1,0 +1,27 @@
+  <!--div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+      <div class="col-xs-12 col-sm-9">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+          <li class="breadcrumb-item active">Applications</li>
+        </ol>
+        <div class="jumbotron">
+          <h1>Application Categories!</h1>
+          <p>This is a list of application categories, click on each to see a list of applications for a given category.</p>
+        </div>
+      </div>
+    </div>
+  </div-->
+<div class ="container" class="c-main-div-background-color">
+
+
+  <!--mat-form-field class="search-form">
+    <input matInput placeholder="Search Applications" type="text">
+  </mat-form-field>
+  <button button="submit" mat-raised-button color="primary">Search</button-->
+
+  <router-outlet></router-outlet>
+</div>
+<div align="right" style="padding-bottom: 10px;padding-right: 10px">
+  <button mat-fab class="fixed-fab" (click)="createNew()"><mat-icon>note_add</mat-icon></button>
+</div>

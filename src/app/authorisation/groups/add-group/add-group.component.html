@@ -1,0 +1,50 @@
+<!-- <p>group-create works!</p> -->
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Create a new group</mat-card-title>
+      <form [formGroup]="groupForm" autocomplete="off" novalidate (ngSubmit)="createGroup(groupForm.value)" fxLayout="column wrap"
+            fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-card-content>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Group's name" formControlName="name" id="name">
+            <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Group's description" formControlName="description" id="description">
+            <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+          </mat-form-field>
+
+          <!-- <mat-form-field>
+            <mat-select  multiple formControlName="role" placeholder="Role">
+              <mat-option *ngFor="let option of RoleList" [value]="option.id">
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="end">The area the role is for.</mat-hint>
+            <mat-error *ngIf="hasError('role', 'required')">role is required</mat-error>
+          </mat-form-field> -->
+
+          <ejs-multiselect formControlName="role" [dataSource]='RoleList' [fields]='fields'
+          [placeholder]="'Select role'">
+        </ejs-multiselect>
+        <div
+          *ngIf="groupForm.controls.role.invalid && (groupForm.controls.role.dirty ||groupForm.controls.role.touched)"
+          class="alert alert-danger">
+          <div *ngIf="groupForm.controls.role.errors.required">
+            role is required.
+          </div>
+        </div>
+
+        </mat-card-content>
+        <mat-card-actions align="center">
+          <button mat-raised-button color="primary" [disabled]="!groupForm.valid">Create</button>
+          <button type="button" mat-raised-button color="warn" [routerLink]="['/groups']">Cancel</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </section>

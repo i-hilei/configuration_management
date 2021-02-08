@@ -1,0 +1,185 @@
+<div class="course" style="padding: 5px">
+  <div fxLayout="row">
+    <div fxFlex="75%" style="width:100%">
+      <mat-form-field>
+        <input matInput placeholder="Search configurations" #input>
+      </mat-form-field>
+    </div>
+    <div fxFlex="25%" style="width:100%; padding-top: 5px">
+      <!--Diff to
+      <mat-select placeholder="Versions" >
+        <mat-option>-- None --</mat-option>
+        <mat-optgroup *ngFor="let version of application.version" [label]="version.name"
+                      [disabled]="version.disabled">
+          <mat-option *ngFor="let configuration of version.configuration" [value]="configuration.id">
+            {{configuration.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+      -->
+    </div>
+    <div fxFlex="25%" style="width:100%; padding-top: 5px">
+      <button mat-button (click)="approvePerEnvironment(configuration.id)">
+        Approve Configuration for
+      </button>
+      <select [(ngModel)]="selectedEnvironmentToApprove"  >
+        <option value="-1">ALL</option>
+        <option *ngFor="let environment of application.environments" [value]="environment.id">{{environment.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+<mat-table #table [dataSource]="dataSource" multiTemplateDataRows
+           matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Name / Key</mat-header-cell>
+    <mat-cell class="description-cell" *matCellDef="let configuration">
+     {{configuration.name}} <br/>
+     {{configuration.key}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isConfidential">
+
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="10" fxFlex.gt-xs="10" fxFlex.gt-sm="10" fxFlex.gt-md="10">isConfidential</mat-header-cell>
+
+    <mat-cell *matCellDef="let configuration" fxFlex="10" fxFlex.gt-xs="10" fxFlex.gt-sm="10" fxFlex.gt-md="10">
+      {{configuration.isConfidential}}
+      </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="tags">
+
+    <mat-header-cell *matHeaderCellDef>tags</mat-header-cell>
+
+    <mat-cell *matCellDef="let configuration">
+      <tag-input theme='bootstrap' [ngModel]="configuration.tags" [identifyBy]="'id'" [displayBy]="'tag'"
+                 (onAdd)="onItemAdded($event,configuration.id)"
+                 (onRemove)="onItemRemoved($event,configuration.id)">
+      </tag-input>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="scope" >
+
+    <mat-header-cell *matHeaderCellDef  mat-sort-header fxFlex="10" fxFlex.gt-xs="10" fxFlex.gt-sm="10" fxFlex.gt-md="10">scope</mat-header-cell>
+
+    <mat-cell class="description-cell"
+              *matCellDef="let configuration" fxFlex="10" fxFlex.gt-xs="10" fxFlex.gt-sm="10" fxFlex.gt-md="10">
+      <ejs-inplaceeditor mode="Inline" type="DropDownList" (actionSuccess)="save($event,configuration.id)" value="{{configuration.scope}}" [model]="model"></ejs-inplaceeditor>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="values">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>values</mat-header-cell>
+    <mat-cell class="description-cell"
+              *matCellDef="let configuration">
+      <table>
+        <tr>
+          <th scope="col">Infrastructure</th>
+          <th scope="col">Value</th>
+          <th scope="col">Approved</th>
+        </tr>
+        <tr *ngFor="let configurationItemValue of configuration.configurationItemValues" >
+          <td><abbr title="{{configurationItemValue.infrastructureComponent?.name}}">{{configurationItemValue.infrastructureComponent?.displayName}}</abbr></td>
+          <td *ngIf="configuration.type == 'STRING'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" (validating)="validating($event,configuration.type)" value="{{configurationItemValue.value}}" ></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'BOOLEAN'">
+            <ejs-inplaceeditor mode="Inline" type="DropDownList" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" (validating)="validating($event,configuration.type)" value="{{configurationItemValue.value}}" [model]="booleanModel"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'INT'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" (validating)="validating($event,configuration.type)" value="{{configurationItemValue.value}}" ></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'USER'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" (validating)="validating($event,configuration.type)" value="{{configurationItemValue.value}}" ></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'PASSWORD'">
+            <ejs-inplaceeditor #element id="element" mode="Inline" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)" (actionBegin)="actionBegin($event,configurationItemValue.id)">
+              <ng-template #template>
+                <input id="password" value="{{configurationItemValue.value}}" type="password"/>
+              </ng-template>
+            </ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'URL'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}"  (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'UNKNOWN'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+
+          <td *ngIf="configuration.type == 'DBCONNECTIONSTRING'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'PATH'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'PORT'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'HOST'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'FQDN'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'EMAIL'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+          <td *ngIf="configuration.type == 'TIMEOUT'">
+            <ejs-inplaceeditor mode="Inline" type="Text" (actionSuccess)="saveConfigurationItemValue($event,configurationItemValue,configuration.type)" value="{{configurationItemValue.value}}" (validating)="validating($event,configuration.type)"></ejs-inplaceeditor>
+          </td>
+
+          <td>
+            <div *ngIf="configurationItemValue.approvalStatus !=='APPROVED'">
+            <button mat-button (click)="approve(configurationItemValue.id)" >
+              <mat-icon class="example-icon" aria-hidden="false" aria-label="check">check_circle_outline</mat-icon>
+            </button>
+            </div>
+            <div *ngIf="configurationItemValue.approvalStatus ==='APPROVED'">
+              <button mat-button>
+              <mat-icon class="example-icon" aria-hidden="false" aria-label="checked">check_circle</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </table>
+<!--
+      <ul class="" style="list-style: none; padding: 0px;">
+        <li *ngFor="let configurationItemValue of configuration.configurationItemValues" >
+          <div fxLayout="row"  fxLayout.xs="column" fxLayoutGap="0px">
+            <div fxFlex="100%" class="child-1">{{configurationItemValue.infrastructureComponent?.name}}</div>
+            <div fxFlex="100%" style="width: 300px" class="child-2">
+              <rocket-edit
+                type="text"
+                [(ngModel)]="configurationItemValue.value"
+                (Save)="saveConfigurationItemValue($event,configurationItemValue)"
+                [name]="editableText"
+                [required]="true"
+                [minlength]="1"
+                [maxlength]="100"
+                ></rocket-edit>
+            </div>
+          </div>
+          <div fxFlex="100%" class="child-1">{{configurationItemValue.approvalStatus}}</div>
+        </li>
+      </ul>
+-->
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let configuration; columns: displayedColumns;" matRipple></mat-row>
+
+</mat-table>
+
+  <mat-paginator [length]="dataSource.numberOfConfigItems" [pageSize]="20"
+               [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
+</div>

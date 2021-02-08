@@ -1,0 +1,116 @@
+
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
+           matSort #sorter1="matSort" matSortActive="id" matSortDirection="asc" matSortDisableClear>
+
+  <ng-container matColumnDef='id'>
+
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+
+    <mat-cell *matCellDef="let configuration">{{configuration.id}}</mat-cell>
+
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+
+    <mat-cell class="description-cell"
+              *matCellDef="let configuration">
+      <input matInput [(ngModel)]="configuration.name"/>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="key">
+
+    <mat-header-cell *matHeaderCellDef>key</mat-header-cell>
+
+    <mat-cell class="description-cell"
+              *matCellDef="let configuration">
+      <input matInput [(ngModel)]="configuration.key"/>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isConfidential">
+
+    <mat-header-cell *matHeaderCellDef>isConfidential</mat-header-cell>
+
+    <mat-cell *matCellDef="let configuration">
+      <input matInput [(ngModel)]="configuration.isConfidential"/></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="tags">
+
+    <mat-header-cell *matHeaderCellDef>tags</mat-header-cell>
+
+    <mat-cell *matCellDef="let configuration">
+      <mat-chip-list>
+        <mat-chip  *ngFor="let tag of configuration.tags">{{tag.tag}}</mat-chip>
+      </mat-chip-list>
+    </mat-cell>
+  </ng-container>
+
+
+  <!-- Comment Column -->
+  <!--ng-container matColumnDef="scope">
+  <mat-header-cell *matHeaderCellDef> Scope </mat-header-cell>
+  <mat-cell *matCellDef="let configuration" [satPopoverAnchorFor]="p" (click)="p.open()">
+  <ng-container *ngIf="configuration.scope">
+  {{configuration.scope}}
+  </ng-container>
+  <span class="add-comment" *ngIf="!configuration.scope">
+   Add a comment
+  </span>
+
+  <sat-popover #p
+          hasBackdrop
+          xAlign="start"
+          yAlign="start"
+          (closed)="update(configuration, $event)">
+  <inline-edit [value]="configuration.scope"></inline-edit>
+  </sat-popover>
+  </mat-cell>
+  </ng-container-->
+
+
+
+  <ng-container matColumnDef="scope">
+
+    <mat-header-cell *matHeaderCellDef>scope</mat-header-cell>
+
+    <mat-cell class="description-cell"
+              *matCellDef="let configuration">{{configuration.scope}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="values">
+
+    <mat-header-cell *matHeaderCellDef>values</mat-header-cell>
+
+    <mat-cell class="description-cell"
+              *matCellDef="let configuration">
+      {{configuration.configurationItemValues}}
+      <ul>
+        <li *ngFor="let configurationItemValue of configuration.configurationItemValues" >
+          {{configurationItemValue.value}}
+        </li>
+      </ul>
+    </mat-cell>
+  </ng-container>
+
+  <!-- For Completion Status -->
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let configuration">
+      <button mat-button color="warn" (click)="deleteConfiguration(configuration.id)">Delete</button>
+      <button mat-button (click)="updateConfigurationItem(configuration.id, configuration)">Save</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let configuration; columns: displayedColumns;"
+           matRipple
+           class="element-row"
+           [class.expanded]="expandedElement == row"
+           (click)="expandedElement = row"></mat-row>
+
+</mat-table>

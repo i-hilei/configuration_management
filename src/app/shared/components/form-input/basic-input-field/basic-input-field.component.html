@@ -1,0 +1,14 @@
+<div class="form-group">
+  <mat-form-field class="example-full-width" [formGroup]="form">
+    <input [ngClass]="{ 'is-invalid': submitted && form.errors }"
+           autocomplete="off" class="form-control" [formControlName]="id" [id]="id" matInput
+           placeholder="{{placeholder}}" type="{{inputType}}">
+  </mat-form-field>
+  <div *ngIf="submitted && form.errors" class="invalid-feedback">
+    <div *ngIf="form.controls['oldPassword'].errors.required">{{validationErrorMessage}}</div>
+  </div>
+  <div *ngIf="form.controls['oldPassword'].hasError('required') && form.controls['oldPassword'].touched"
+       class="error">
+    {{validationErrorMessage}}
+  </div>
+</div>

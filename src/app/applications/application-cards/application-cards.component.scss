@@ -1,0 +1,204 @@
+.img {
+  width: 100%;
+  margin-bottom: 18%;
+}
+
+.container {
+  min-height: 100%;
+  width: 100%;
+}
+
+.card-picture {
+  width: 23%;
+  margin-bottom: 2%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.no-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-list-min-height {
+  min-height: 242px;
+}
+
+.flat {
+  display: flex;
+  list-style: none;
+}
+
+#navcontainer ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+}
+
+#navcontainer ul li {
+  display: inline-block;
+  margin: 0 10px;
+  color: #fff;
+
+  padding: .2em 1em;
+}
+
+#navcontainer ul li a {
+  text-decoration: none;
+}
+
+#navcontainer ul li a:hover {
+  color: #fff;
+  background-color: #369;
+}
+
+#navi li {
+  position: relative;
+  z-index: 1;
+}
+
+#navi ul {
+  position: absolute;
+
+  left: 0;
+}
+
+#env ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+  line-height: 200%
+}
+
+.mat-card-header-color {
+  background-color: #169bd5;
+
+  border-bottom: 1px solid white;
+  width: 100%
+}
+
+.mat-card-title-subtitle-formatting {
+  text-decoration: none;
+  color: #ffffff
+}
+
+.c-img-margin-top-left {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.c-mat-header-margin-top {
+  margin-top: 10px;
+}
+
+.c-mat-envType-div {
+  background-color: #ffffff;
+  width: 100%
+}
+
+.c-mat-application-div {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 5px;
+}
+
+.mat-card-border-radius-color {
+  border-radius: 5px;
+  padding: 0px;
+  border: 2px solid #169bd5;
+}
+
+.mat-card-header-border-radius-color {
+  border-radius: 5px 5px 0 0;
+}
+
+.c-div-padding {
+  padding: 5px;
+}
+
+.c-font-size-p {
+  font-size: 17px;
+}
+
+.remove-margin-p {
+  margin: 0;
+}
+
+.c-font-size-div {
+  margin: 0;
+}
+
+.link-color {
+  color: #169bd5;
+}
+
+.c-remove-margin-top {
+  margin-top: 0px !important;
+}
+
+.environment-style {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.mat-icon-margin {
+  margin-top: 17px;
+}
+
+.tag-input-width {
+  width: 90%;
+  z-index: 1;
+}
+
+ng2-tag-input__text-input ng-untouched ng-pristine ng-valid {
+  display: inline;
+  vertical-align: middle;
+  border: none;
+  padding: 0px 0 0 .5rem;
+  height: 38px;
+  font-size: 1em;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.example-large-box {
+  height: 300px;
+  width: 300px;
+}
+
+.example-stretched-tabs {
+  max-width: 800px;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #169bd5;
+}
+
+.underline-color {
+  color: #169bd5;
+}
+
+.mat-card {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: relative;
+  padding: 0px !important;
+  border-radius: 4px;
+}
+
+// For back-ground tab color
+tag-input div div tag {
+  background-color: #169bd5 !important;
+}
+
+// For font color
+tag-input div div tag div div div {
+  color: #ffffff !important;
+}

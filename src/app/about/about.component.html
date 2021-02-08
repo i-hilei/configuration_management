@@ -1,0 +1,39 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <mat-card class="login-box">
+    <mat-card-header>
+      <mat-card-title>About</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table>
+        <tr>
+          <td>Version</td><td>{{version?.version}}</td>
+        </tr>
+        <tr>
+          <td>Expires</td><td>{{license?.expirationDate | date}}</td>
+        </tr>
+        <tr>
+          <td>Product</td><td>{{license?.product}}</td>
+        </tr>
+        <tr>
+          <td>Edition</td><td>{{license?.edition}}</td>
+        </tr>
+        <tr>
+          <td>Licensed to</td><td>{{license?.companyName}}</td>
+        </tr>
+        <tr>
+          <td>Licensed # of user</td><td>{{license?.amountOfUsers > -1 ? license?.amountOfUsers : 'Unlimited' }}</td>
+        </tr>
+        <tr>
+          <td>Licensed # of applications</td><td>{{license?.amountOfApplications> -1 ? license?.amountOfApplications : 'Unlimited'}}</td>
+        </tr>
+        <tr>
+          <td>Licensed # of hosts</td><td>{{license?.amountOfHosts> -1 ? license?.amountOfHosts : 'Unlimited'}}</td>
+        </tr>
+        <tr>
+          <td>Licensed plugins</td><td>{{license?.plugins}}</td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -1,0 +1,30 @@
+.error{
+  color: #FF0000;
+}
+.licenseValidate-container {
+  margin: auto;
+}
+
+.licenseValidate-container1 {
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  margin: 2em auto auto;
+
+  margin: auto;
+}
+
+.licenseValidate-box{
+  margin: auto;
+  /* margin-top: 15%; */
+  width: 40% !important;
+}
+
+.license-validation-wrapper{
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.example-full-width{
+  display: block;
+}

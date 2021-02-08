@@ -1,0 +1,81 @@
+<mat-card style="padding: 0px;">
+  <mat-card-header style="background-color: #efefef; border-bottom: 1px solid white; width:100%">
+    <img mat-card-avatar src='{{host.image || "http://www.pngall.com/wp-content/uploads/2016/06/Environment-Free-Download-PNG.png"}}' />
+    <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+      <span fxFlex="100%">
+        <a style="text-decoration: none; color: black" [routerLink]="['/environments/environment-overview',host.id ]">{{host.displayName || host.name}}</a>
+      </span>
+    </mat-card-title>
+    <mat-card-subtitle>
+<!--
+      <span *ngFor="let data of environment.applicationIdentifier;let i=index; first as isFirst">
+        <span *ngIf="isFirst">{{data.identifier}}</span>  {{data.displayName}}
+      </span>
+-->
+    </mat-card-subtitle>
+    <div fxFlex></div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div fxLayout="row">
+      <div fxFlex="25%" id="env" style="background-color: #eeeeee; width:100%">
+        <mat-list style="min-height: 200px;">
+<!--
+          <mat-list-item *ngFor="let item of amountOfServersPerType | keyvalue">
+            <div matLine>
+                  <span style="float:left">
+                    <a style="text-decoration: none; color: black; font-size: 14px;">{{item.key}}</a>
+                  </span>
+              <span style="float:right; font-size: 15px;">{{item.value || '-' }}</span>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+-->
+        </mat-list>
+      </div>
+      <div fxFlex="75%" style="background-color: whitesmoke; padding: 5px; width:100%">
+<!--
+        <div id='container'>
+          <span class="content-title"> Owner: </span>
+          <ejs-inplaceeditor id="owner" #dropdownEle1 mode="Inline" type="DropDownList" (actionSuccess)="actionSuccessOwner($event,environment.id)" value="{{environment.owner?.preName}} {{environment.owner?.name}}" [model]="ownerModel">
+            <ng-template #itemTemplate="" let-data="">
+
+              <span><span class='name'> {{data.preName}}</span><span class ='city'>{{data.name}}</span></span>
+            </ng-template>
+          </ejs-inplaceeditor>
+        </div>
+        <div id='container'>
+          <span class="content-title"> Delegate: </span>
+          <ejs-inplaceeditor id="delegate" #dropdownEle2 mode="Inline" type="DropDownList" (actionSuccess)="actionSuccessDelegate($event,environment.id)" value="{{environment.ownerDelegate?.preName}} {{environment.ownerDelegate?.name}}" [model]="ownerDelegateModel">
+            <ng-template #itemTemplate="" let-data="">
+
+              <span><span class='name'> {{data.preName}}</span><span class ='city'>{{data.name}}</span></span>
+            </ng-template>
+          </ejs-inplaceeditor>
+        </div>
+
+        AutoDeployable : <ejs-inplaceeditor id="isAutoDeployable" mode="Inline" type="DropDownList" (actionSuccess)="actionSuccessAutoDeployable($event,environment.id)" value="{{environment.isAutoDeployable}}" [model]="booleanModel"></ejs-inplaceeditor><br/>
+        Under Change Control : <ejs-inplaceeditor id="isChangeControl" mode="Inline" type="DropDownList" (actionSuccess)="actionSuccessChangeControl($event,environment.id)" value="{{environment.isUnderChangeControl}}" [model]="booleanModel"></ejs-inplaceeditor><br/>
+        Auto Approve : <ejs-inplaceeditor id="isAutoApprove" mode="Inline" type="DropDownList" (actionSuccess)="actionSuccessAutoApprove($event,environment.id)" value="{{environment.isAutoApprove}}" [model]="booleanModel"></ejs-inplaceeditor><br/>
+        Type : <ejs-inplaceeditor id="type" mode="Inline" type="DropDownList" (actionSuccess)="actionSuccessType($event,environment.id)" value="{{environment.type}}" [model]="typeModel"></ejs-inplaceeditor><br/>
+        Status:  <ejs-inplaceeditor id="status" mode="Inline" type="DropDownList" (actionSuccess)="actionSuccess($event,environment.id)" value="{{environment.status}}" [model]="model"></ejs-inplaceeditor><br/>
+
+        <br/>
+        <div>
+          Tags:
+          <tag-input theme='bootstrap' [ngModel]="environment.tags" [identifyBy]="'id'" [displayBy]="'tag'"
+                     (onAdd)="onItemAdded($event,environment.id)"
+                     (onRemove)="onItemRemoved($event,environment.id)">
+          </tag-input>
+        </div>
+        <br/>
+        Environment Versions available:
+        <div id="navcontainer">
+          Version : {{environment.version}}<br/>
+        </div>
+-->
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+

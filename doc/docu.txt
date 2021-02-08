@@ -1,0 +1,7 @@
+https://www.reddit.com/r/Angular2/comments/9xiovl/angular_material_data_table_paginator_getting/
+
+https://github.com/indiaaeevans/products-material-datatable/blob/master/src/app/my-table/my-table.component.ts
+
+https://medium.com/@indiaaeevans/building-a-data-table-retrieving-data-through-http-with-angular-material-part-1-6c9f5ad87aa
+
+https://github.com/Gbuomprisco/ngx-chips

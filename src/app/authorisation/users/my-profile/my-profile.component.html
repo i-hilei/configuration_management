@@ -1,0 +1,87 @@
+<div fxLayout="row" fxLayoutGap="5px" style="height: 100vh; padding: 5px">
+    <div fxFlex="50%" id="env" style="background-color: #fafafa; width:100%; padding: 5px ">
+        Zusammenfassung<br/>
+        <table>
+            <tr>
+                <td>userid</td>
+                <td>{{user?.userId}}</td>
+            </tr>
+            <tr>
+                <td>Prename</td>
+                <td>{{user?.preName}}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{user?.name}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><a style="text-decoration:none;" href="mailto:{{user?.email}}">{{user?.email}}</a></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <a style="text-decoration:none;" (click)="ChangePassword()">
+                      Change Password
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>status</td>
+                <td>{{user?.status}}</td>
+            </tr>
+            <tr>
+                <td>isTechnical</td>
+                <td>{{user?.technical}}</td>
+            </tr>
+            <tr>
+                <td>lastLogin</td>
+                <td>{{user?.lastLogin | date}}</td>
+            </tr>
+            <tr>
+                <td>lastFailedLogin</td>
+                <td>{{user?.lastFailedLogin | date}}</td>
+            </tr>
+            <tr>
+                <td>failedAttempts</td>
+                <td>{{user?.failedAttempts || "-"}}</td>
+            </tr>
+            <tr>
+                <td>passwordExpired</td>
+                <td>{{user?.passwordExpired}}</td>
+            </tr>
+            <tr>
+                <td>tags</td>
+                <td>{{user?.tags}}</td>
+            </tr>
+            <tr>
+                <td>groups</td>
+                <td>
+                    <span *ngFor="let group of user?.groups;let i=index; first as isFirst">
+                      {{group.name}}<br/>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>applications</td>
+                <td>
+                    <span *ngFor="let shortApplicationIdentifier of user?.applicationIdentifiers;let i=index; first as isFirst">
+                      {{shortApplicationIdentifier.identifier}}&nbsp;{{shortApplicationIdentifier.displayName}}<br/>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>applicationsDelegate</td>
+                <td>
+                    <span *ngFor="let shortApplicationIdentifier of user?.applicationDelegateIdentifiers;let i=index; first as isFirst">
+                      {{shortApplicationIdentifier.identifier}}&nbsp;{{shortApplicationIdentifier.displayName}}<br/>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div fxFlex="50%" id="env" style="background-color: #fafafa; width:100%; padding: 5px ">
+        Activities <br/> ---
+        <router-outlet name="right"></router-outlet>
+    </div>
+</div>

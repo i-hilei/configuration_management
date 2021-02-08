@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vendorDelivery version="0.2" application="konfigure_ui" applicationId="01-01-01">
+  <contacts>
+    <contact role="Technical Contact">
+      <name>Eduard van den Bongard</name>
+      <adress/>
+      <email>evdb@x-idra.de</email>
+      <phone/>
+    </contact>
+  </contacts>
+  <configurations>
+    <configurationSet id="1" name="config">
+      <file id="1" file="assets/config/config.json" name="config.json">
+        <deployAlways>false</deployAlways>
+        <ci key="baseUrl" scope="ENVIRONMENT" confidential="false">
+          <value type="URL">https://protoype.treehouse.devops-in-a-box.de</value>
+        </ci>
+        <ci key="colorScheme" scope="ENVIRONMENT" confidential="false">
+          <value type="STRING">blue</value>
+        </ci>
+        <ci key="stage" scope="ENVIRONMENT" confidential="false">
+          <value type="STRING">dev1</value>
+        </ci>
+      </file>
+      <processedToManifest>false</processedToManifest>
+    </configurationSet>
+    <configurationSet id="2" name="kubernetes">
+      <file id="1" file="nginx.yaml" name="nginx.yaml">
+        <deployAlways>false</deployAlways>
+        <ci key="BASE_URL" scope="ENVIRONMENT" confidential="false">
+          <value type="URL">https://protoype.treehouse.devops-in-a-box.de</value>
+        </ci>
+        <ci key="COLOR" scope="ENVIRONMENT" confidential="false">
+          <value type="STRING">blue</value>
+        </ci>
+        <ci key="STAGE" scope="ENVIRONMENT" confidential="false">
+          <value type="STRING">dev1</value>
+        </ci>
+      </file>
+      <processedToManifest>false</processedToManifest>
+    </configurationSet>
+  </configurations>
+  <deployables>
+    <file.File id="1" groupid="konfigure_ui" tag="konfigure_ui" file="assets/images/gears.png"
+               name="gears.png" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="2" groupid="konfigure_ui" tag="konfigure_ui" file="assets/images/Konfigure_Logo.png"
+               name="Konfigure_Logo.png" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="3" groupid="konfigure_ui" tag="konfigure_ui" file="3rdpartylicenses.txt"
+               name="3rdpartylicenses" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="4" groupid="konfigure_ui" tag="konfigure_ui" file="favicon.ico"
+               name="favicon" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="5" groupid="konfigure_ui" tag="konfigure_ui" file="index.html"
+               name="index.html" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+      <configurationSet>1</configurationSet>
+    </file.File>
+    <file.File id="6" groupid="konfigure_ui" tag="konfigure_ui" file="main.f373a521d94bb81762db.js"
+               name="main.f373a521d94bb81762db.js" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="7" groupid="konfigure_ui" tag="konfigure_ui" file="polyfills.0399e95f8547081c6d3e.js"
+               name="polyfills.0399e95f8547081c6d3e.js" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="8" groupid="konfigure_ui" tag="konfigure_ui" file="polyfills-es5.173126a80c50c543ff3d.js"
+               name="polyfills-es5.173126a80c50c543ff3d.js" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="9" groupid="konfigure_ui" tag="konfigure_ui" file="runtime.458556a34b891ea32398.js"
+               name="runtime.458556a34b891ea32398.js" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <file.File id="10" groupid="konfigure_ui" tag="konfigure_ui" file="styles.fbfa27b1fdd827c9ffde.css"
+               name="styles.fbfa27b1fdd827c9ffde.css" checksum=""
+               buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+    </file.File>
+    <k8s.ResourcesFile  id="11" groupid="konfigure_ui" tag="konfigure_ui" file="nginx.yaml"
+                        name="KonfigureOnDocker" checksum=""
+                        buildReference="28baf34" buildToolURL="https://bitbucket.treehouse.devops-in-a-box.de/scm/diab/configurationmanagement-ui.git">
+      <configurationSet>2</configurationSet>
+    </k8s.ResourcesFile>
+  </deployables>
+  <documentation>
+    <releaseNote version="1.0.0" status="APPROVED" file="releasenotes-2.1.13.1.xml" type="XML"/>
+    <installationManual/>
+    <testReport/>
+  </documentation>
+  <testscripts/>
+</vendorDelivery>

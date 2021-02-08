@@ -1,0 +1,112 @@
+<div class="course" style="padding: 5px">
+  <a style="text-decoration: none; color: black" [routerLink]="['/users']">
+    Users
+  </a>
+  <a style="text-decoration: none; color: black" [routerLink]="['/groups']">
+    Groups
+  </a>
+  <a style="text-decoration: none; color: black" [routerLink]="['/roles']">
+    Roles
+  </a>
+  <a style="text-decoration: none; color: black" [routerLink]="['/privileges']">
+    Privileges
+  </a>
+  
+  <div align="right" style="padding-right: 10px">
+    <a [routerLink]="['/users/add-user']" mat-button color="primary">Create User</a>
+  </div>  
+  <br/>
+  
+  <!--mat-form-field>
+    <input matInput placeholder="Search users" #input>
+  </mat-form-field-->
+
+  <!--MzE4NzU2QDMxMzgyZTMyMmUzMGp4UzFhTGRuMGd6bmtiRGtJaGdEZHJVM2JYalkxalRsb05Eek5SQzArTjQ9 -->
+
+<router-outlet></router-outlet>
+
+  <!--div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div-->
+
+  <!--ejs-grid [dataSource]='data' [allowSorting]='true' [editSettings]='editSettings' [toolbar]='toolbar' >
+    <e-columns>
+      <e-column field='userid' headerText='userid' width=120></e-column>
+      <e-column field='preName' headerText='preName' width=150></e-column>
+      <e-column field='name' headerText='name' width=120></e-column>
+      <e-column field='email' headerText='email' width=120></e-column>
+      <e-column field='status' headerText='status' width=120></e-column>
+      <e-column field='isTechnical' headerText='isTechnical' width=120></e-column>
+      <e-column field='tags' headerText='tags' width=120></e-column>
+    </e-columns>
+  </ejs-grid-->
+
+  <!--mat-table [dataSource]="dataSource" multiTemplateDataRows
+             matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+
+    <ng-container matColumnDef="fullname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20">fullname</mat-header-cell>
+      <mat-cell *matCellDef="let user" fxFlex="20">
+      <a href="">{{user.preName}} &nbsp; {{user.name}}</a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userid">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header  fxFlex="20">userid</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let user"  fxFlex="20">
+        {{user.userid}} <br/> {{user.email}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header  fxFlex="20">status</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let user"  fxFlex="20">
+        <ejs-inplaceeditor mode="Inline" type="DropDownList" (actionSuccess)="save($event,user)" value="{{user.status}}" [model]="statusModel"></ejs-inplaceeditor>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isTechnical">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header  fxFlex="20">isTechnical</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let user"  fxFlex="20">
+        <ejs-inplaceeditor mode="Inline" type="DropDownList" (actionSuccess)="save($event,user)" value="{{user.isTechnical}}" [model]="booleanModel"></ejs-inplaceeditor>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tags">
+      <mat-header-cell *matHeaderCellDef>tags</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <tag-input theme='bootstrap' [ngModel]="user.tags" [identifyBy]="'id'" [displayBy]="'tag'"
+                   (onAdd)="onItemAdded($event,user.id)"
+                   (onRemove)="onItemRemoved($event,user.id)">
+        </tag-input>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="groups" >
+      <mat-header-cell *matHeaderCellDef  mat-sort-header fxFlex="20">groups</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let user" fxFlex="20">
+        <ul>
+          <li  *ngFor="let group of user.groups" >
+            {{group.name}}
+          </li>
+        </ul>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="applications" >
+      <mat-header-cell *matHeaderCellDef  mat-sort-header fxFlex="20">applications</mat-header-cell>
+      <mat-cell class="description-cell" *matCellDef="let user" fxFlex="20">
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let configuration; columns: displayedColumns;" matRipple></mat-row>
+
+  </mat-table>
+
+  <mat-paginator [length]="dataSource.numberOfUsers" [pageSize]="20"
+                 [pageSizeOptions]="[10, 50, 100]"></mat-paginator-->
+</div>
+

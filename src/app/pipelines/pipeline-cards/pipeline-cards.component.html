@@ -1,0 +1,15 @@
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+  <div fxLayout="row wrap">
+    <div
+      fxFlex="33"
+      fxFlex.md="33"
+      fxFlex.sm="50"
+      fxFlex.xs="100"
+      style="padding: 5px;"
+    >
+      <mat-form-field class="search-form">
+        <input matInput placeholder="Search" type="text"  [(ngModel)]="searchword"(input)="searchThis()">
+      </mat-form-field>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="menu-height">
+  <mat-toolbar class="mat-toolbar-color">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon class="mat-icon-main-color">menu</mat-icon>
+      </button>
+      <span>
+        <mat-icon class="example-icon mat-icon-main-color" aria-hidden="false" aria-label="Applications">apps</mat-icon>
+      </span>
+      <span class="gap--navbar">
+        <a [routerLink]="['/applications']">
+          <img src="./assets/images/Konfigure_Logo.png" style="width:150px;" alt="Home">
+        </a>
+      </span>
+      <span class="c-nav--border"></span>
+      <div fxShow="true" fxHide.lt-md>
+        <a mat-button class="title-color-text_decoration" [routerLink]="['/applications']"> Applications </a>
+        <a mat-button class="title-color-text_decoration" [routerLink]="['/environments']"> Environments </a>
+        <a mat-button class="title-color-text_decoration" [routerLink]="['/pipelines']"> Pipelines </a>
+        <a mat-button class="title-color-text_decoration" [routerLink]="['/users']"> User Management </a>
+      </div>
+
+      <span class="menu-spacer"></span>
+
+      <span class="c-mat-search-icon gap-search-bar">
+        <mat-form-field class="search-form mat-icon-main-color c-mat-from-field-search-bar-text-size">
+          <input matInput placeholder="Search" type="text" [(ngModel)]="searchword">
+        </mat-form-field>
+      </span>
+
+      <span class="gap-search-bar">
+        <mat-icon class="example-icon mat-icon-main-color mat-icon-size c-notification-padding" aria-hidden="false"
+          aria-label="notification">
+          notifications_none</mat-icon>
+      </span>
+
+      <span class="title-color-text_decoration">
+        {{currentUser?.name}}
+      </span>
+
+      <span>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon class="example-icon mat-icon-main-color mat-icon-size" aria-hidden="false" aria-label="account">
+            account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/users/my-profile']">
+            <mat-icon>dialpad</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/about']">
+            <mat-icon>info</mat-icon>
+            <span>About</span>
+          </button>
+          <button mat-menu-item (click)="logout()">Log Out</button>
+        </mat-menu>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" mat-list-item>Close</a>
+        <a (click)="sidenav.toggle()" mat-list-item [routerLink]="['/applications']"> Applications </a>
+        <a (click)="sidenav.toggle()" mat-list-item [routerLink]="['/environments']"> Environments </a>
+        <a (click)="sidenav.toggle()" mat-list-item [routerLink]="['/pipelines']"> Pipelines </a>
+        <a (click)="sidenav.toggle()" mat-list-item [routerLink]="['/users']"> User Management </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <div class="mat-container-main--wrapper">
+      <router-outlet></router-outlet>
+      <router-outlet name="right"></router-outlet>
+    </div>
+  </mat-sidenav-container>
+</div>
+
+<!--span class = "gap">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="search">search</mat-icon>
+    <mat-form-field class="search-form">
+      <input matInput placeholder="Search" type="text" [(ngModel)]="searchword"(input)="searchThis()">
+    </mat-form-field>
+    </span-->
